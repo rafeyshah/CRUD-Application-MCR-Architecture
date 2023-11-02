@@ -1,11 +1,12 @@
 var Work = require("../models/workDOA");
 
 exports.createWork = async function (req, res, next) {
+  console.log("User ID: ", req.user.id);
   var work = {
     name: req.body.name,
     type: req.body.type,
     startDate: req.body.startDate,
-    userId: req.body.userId,
+    userId: req.user.id,
   };
 
   try {
@@ -53,7 +54,7 @@ exports.updateWork = async function (req, res, next) {
     startDate: req.body.startDate,
     userId: req.body.userId,
   };
-  console.log(req.params.id)
+  console.log(req.params.id);
   try {
     const updateWork = await Work.findByIdAndUpdate(req.params.id, work);
     res.json({

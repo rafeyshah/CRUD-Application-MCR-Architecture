@@ -1,5 +1,8 @@
 var User = require("../models/userDOA");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 
 exports.createUser = async function (req, res, next) {
   var user = {
@@ -33,9 +36,11 @@ exports.getUser = async function (req, res, next) {
         login.password
       );
       if (password_valid) {
-        res.json({
-          body: login,
-        });
+        const token = jwt.sign(
+          { id: login.id, createdAt: login.createdAt },
+          process.env.TOKEN_SECRET
+        );
+        res.json({ token: token });
       } else {
         res.json({
           error: "Password Incorrect",
@@ -43,9 +48,7 @@ exports.getUser = async function (req, res, next) {
       }
     }
   } catch (err) {
-    res.json({
-      error: err,
-    });
+    console.log("error", err);
   }
 };
 
