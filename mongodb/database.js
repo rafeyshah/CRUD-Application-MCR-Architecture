@@ -13,7 +13,7 @@ var disconnected = chalk.bold.red;
 var termination = chalk.bold.magenta;
 
 //export this function and imported by server.js
-module.exports =function(){
+module.exports = function() {
 
     mongoose.connect(dbURL);
 

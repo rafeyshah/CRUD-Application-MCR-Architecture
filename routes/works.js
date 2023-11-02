@@ -1,10 +1,9 @@
-const express = require("express");
 const workController = require("../controllers/work");
 
-const router = express.Router();
-
-router.get("/", (req, res) => {
-    workController.getAll(req, res);
-});
-
-module.exports = router;
+module.exports = function(router) {
+    router.post('/create', workController.createWork);
+    router.get('/get', workController.getWorks);
+    router.get('/get/:name', workController.getWork);
+    router.put('/update/:id', workController.updateWork);
+    router.delete('/remove/:id', workController.removeWork);
+}

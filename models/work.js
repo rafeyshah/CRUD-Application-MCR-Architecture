@@ -14,10 +14,10 @@ var workSchema = new Schema(
       required: true,
     },
     startDate: {
-      type: Date,
+      type: String,
     },
     userId: {
-      id: Number,
+      type: Number,
     },
   },
   {
