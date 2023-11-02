@@ -1,10 +1,11 @@
 var User = require("../models/userDOA");
+const bcrypt = require("bcrypt");
 
 exports.createUser = async function (req, res, next) {
   var user = {
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: await bcrypt.hash(req.body.password, 10),
     userId: req.body.userId,
   };
 
@@ -22,16 +23,25 @@ exports.createUser = async function (req, res, next) {
 };
 
 exports.getUser = async function (req, res, next) {
-  console.log("Email: ", req.body.email);
-  console.log("Password: ", req.body.password);
   try {
     const login = await User.findOne({
       email: req.body.email,
-      password: req.body.password,
     });
-    res.json({
-      body: login,
-    });
+    if (login) {
+      const password_valid = await bcrypt.compare(
+        req.body.password,
+        login.password
+      );
+      if (password_valid) {
+        res.json({
+          body: login,
+        });
+      } else {
+        res.json({
+          error: "Password Incorrect",
+        });
+      }
+    }
   } catch (err) {
     res.json({
       error: err,
