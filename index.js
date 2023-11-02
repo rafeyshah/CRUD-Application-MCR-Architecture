@@ -2,6 +2,7 @@ const express = require('express');
 const log = require('morgan')('dev');
 const bodyParser = require('body-parser');
 const worksRoutes = require("./routes/works");
+const userRoutes = require("./routes/user");
 const db = require('./mongodb/database');
 
 
@@ -17,8 +18,10 @@ app.use(bodyParserJSON);
 app.use(bodyParserURLEncoded);
 
 app.use('/works',router);
-worksRoutes(router);
+app.use('/', router);
 
+worksRoutes(router);
+userRoutes(router)
 
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
