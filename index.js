@@ -1,9 +1,12 @@
 const express = require("express");
 const log = require("morgan")("dev");
 const bodyParser = require("body-parser");
+
 const worksRoutes = require("./routes/works");
 const userRoutes = require("./routes/user");
 const groupRoutes = require("./routes/groups")
+const workerRoutes = require("./routes/workers")
+
 const db = require("./mongodb/database");
 
 const app = express();
@@ -19,5 +22,6 @@ app.use(bodyParserURLEncoded);
 app.use("/", userRoutes);
 app.use("/works", worksRoutes);
 app.use("/groups", groupRoutes);
+app.use("/workers", workerRoutes);
 
 app.listen(3000, () => console.log("Example app listening on port 3000!"));
