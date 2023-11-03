@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const { validate } = require("../models/user");
 dotenv.config();
 
-exports.createUser = async function (req, res, next) {
+exports.createUser = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -29,7 +29,7 @@ exports.createUser = async function (req, res, next) {
   }
 };
 
-exports.getUser = async function (req, res, next) {
+exports.getUser = async function (req, res) {
   try {
     const login = await User.findOne({
       email: req.body.email,
@@ -56,7 +56,7 @@ exports.getUser = async function (req, res, next) {
   }
 };
 
-exports.getUsers = async function (req, res, next) {
+exports.getUsers = async function (req, res) {
   try {
     const allUsers = await User.find({});
     res.json({

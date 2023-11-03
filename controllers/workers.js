@@ -1,7 +1,7 @@
 var Work = require("../models/workersDOA");
 const { validate } = require("../models/workers");
 
-exports.createWorker = async function (req, res, next) {
+exports.createWorker = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -23,7 +23,7 @@ exports.createWorker = async function (req, res, next) {
   }
 };
 
-exports.getWorker = async function (req, res, next) {
+exports.getWorker = async function (req, res) {
   try {
     const newGotWorker = await Work.find({})
       .populate("works")
@@ -38,7 +38,7 @@ exports.getWorker = async function (req, res, next) {
   }
 };
 
-exports.getSingleWorker = async function (req, res, next) {
+exports.getSingleWorker = async function (req, res) {
   try {
     const singleWorker = await Work.findById(req.params.id);
     res.json({
@@ -51,7 +51,7 @@ exports.getSingleWorker = async function (req, res, next) {
   }
 };
 
-exports.updateWork = async function (req, res, next) {
+exports.updateWork = async function (req, res) {
   var worker = {
     workId: req.body.workId,
     groupId: req.body.groupId,
@@ -69,7 +69,7 @@ exports.updateWork = async function (req, res, next) {
   }
 };
 
-exports.removeWork = async function (req, res, next) {
+exports.removeWork = async function (req, res) {
   try {
     const removeWork = await Work.findByIdAndDelete(req.params.id);
     res.json({

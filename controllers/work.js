@@ -1,7 +1,7 @@
 var Work = require("../models/workDOA");
 const { validate } = require("../models/work");
 
-exports.createWork = async function (req, res, next) {
+exports.createWork = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -24,7 +24,7 @@ exports.createWork = async function (req, res, next) {
   }
 };
 
-exports.getWorks = async function (req, res, next) {
+exports.getWorks = async function (req, res) {
   try {
     const newGotWork = await Work.find({});
     res.json({
@@ -37,7 +37,7 @@ exports.getWorks = async function (req, res, next) {
   }
 };
 
-exports.getWork = function (req, res, next) {
+exports.getWork = function (req, res) {
   try {
     const getWorkByName = Work.get({ name: req.params.name });
     res.json({
@@ -50,7 +50,7 @@ exports.getWork = function (req, res, next) {
   }
 };
 
-exports.updateWork = async function (req, res, next) {
+exports.updateWork = async function (req, res) {
   var work = {
     name: req.body.name,
     type: req.body.type,
@@ -70,7 +70,7 @@ exports.updateWork = async function (req, res, next) {
   }
 };
 
-exports.removeWork = async function (req, res, next) {
+exports.removeWork = async function (req, res) {
   try {
     const removeWork = await Work.findByIdAndDelete(req.params.id);
     res.json({

@@ -7,20 +7,20 @@ workSchema.statics = {
     await work.save();
   },
 
-  get: async function (query, cb) {
-    await this.find(query, cb);
+  get: async function (query) {
+    await this.find(query);
   },
 
-  getByName: async function (query, cb) {
-    await this.find(query, cb);
+  getByName: async function (query) {
+    await this.find(query);
   },
 
-  update: async function (query, updateData, cb) {
-    await this.findOneAndUpdate(query, { $set: updateData }, { new: true }, cb);
+  update: async function (query, updateData) {
+    await this.findOneAndUpdate(query, { $set: updateData }, { new: true });
   },
 
-  delete: async function (query, cb) {
-    await this.findOneAndDelete(query, cb);
+  delete: async function (query) {
+    await this.findOneAndDelete(query);
   },
 };
 
