@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+const Joi = require("joi");
 
 var workSchema = new Schema(
   {
@@ -18,7 +19,7 @@ var workSchema = new Schema(
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: "users"
+      ref: "users",
     },
   },
   {
@@ -26,4 +27,15 @@ var workSchema = new Schema(
   }
 );
 
-module.exports = workSchema;
+function validateWork(genre) {
+  const schema = Joi.object({
+    name: Joi.string().min(5).max(50).required(),
+    type: Joi.string().min(5).max(50).required(),
+    startDate: Joi.string().min(5).max(50).required(),
+    userId: Joi.string().min(24).max(24),
+  });
+
+  return schema.validate(genre);
+}
+exports.validate = validateWork;
+exports.workSchema = workSchema;

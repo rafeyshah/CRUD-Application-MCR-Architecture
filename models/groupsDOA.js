@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var groupsSchema = require("./groups");
+const { groupsSchema } = require("./groups");
 
 groupsSchema.statics = {
   create: function (data, cb) {

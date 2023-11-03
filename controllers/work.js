@@ -1,6 +1,10 @@
 var Work = require("../models/workDOA");
+const { validate } = require("../models/work");
 
 exports.createWork = async function (req, res, next) {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
   var work = {
     name: req.body.name,
     type: req.body.type,

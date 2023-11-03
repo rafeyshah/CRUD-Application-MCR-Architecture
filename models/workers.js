@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+const Joi = require("joi");
 
 var workersSchema = new Schema(
   {
@@ -22,4 +23,14 @@ var workersSchema = new Schema(
   }
 );
 
-module.exports = workersSchema;
+function validateWorker(genre) {
+  const schema = Joi.object({
+    works: Joi.string().min(24).max(24).required(),
+    groups: Joi.string().min(24).max(24).required(),
+    type: Joi.string().min(5).max(50).required(),
+  });
+
+  return schema.validate(genre);
+}
+exports.validate = validateWorker;
+exports.workerSchema = workersSchema;

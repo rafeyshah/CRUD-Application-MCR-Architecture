@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var workSchema = require("./work");
+var { workSchema } = require("./work");
 
 workSchema.statics = {
   create: function (data, cb) {

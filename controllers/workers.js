@@ -1,6 +1,10 @@
 var Work = require("../models/workersDOA");
+const { validate } = require("../models/workers");
 
 exports.createWorker = async function (req, res, next) {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
   var worker = {
     works: req.body.works,
     groups: req.body.groups,
@@ -21,7 +25,9 @@ exports.createWorker = async function (req, res, next) {
 
 exports.getWorker = async function (req, res, next) {
   try {
-    const newGotWorker = await Work.find({}).populate("works").populate("groups");
+    const newGotWorker = await Work.find({})
+      .populate("works")
+      .populate("groups");
     res.json({
       msg: newGotWorker,
     });

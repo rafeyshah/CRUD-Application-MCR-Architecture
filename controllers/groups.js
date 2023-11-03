@@ -1,6 +1,10 @@
 var Groups = require("../models/groupsDOA");
+const { validate } = require("../models/groups");
 
 exports.createGroup = async function (req, res, next) {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
   var group = {
     name: req.body.name,
     works: req.body.works,
@@ -47,7 +51,7 @@ exports.getGroups = async function (req, res, next) {
 exports.updateGroup = async function (req, res, next) {
   var group = {
     name: req.body.name,
-    workId: req.body.workId,
+    works: req.body.works,
   };
   try {
     const updateGroup = await Groups.findByIdAndUpdate(req.params.id, group);
