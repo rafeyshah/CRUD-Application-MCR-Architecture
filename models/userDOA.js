@@ -2,17 +2,17 @@ var mongoose = require("mongoose");
 var { userSchema } = require("./user");
 
 userSchema.statics = {
-  create: function (data, cb) {
+  create: async function (data) {
     var work = new this(data);
-    work.save(cb);
+    await work.save();
   },
 
-  get: function (query, cb) {
-    this.find(query, cb);
+  get: async function (query) {
+    await this.find(query);
   },
 
-  getByName: function (query, cb) {
-    this.find(query, cb);
+  getByName: async function (query) {
+    await this.find(query);
   },
 
   //   update: function (query, updateData, cb) {

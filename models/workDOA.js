@@ -2,25 +2,25 @@ var mongoose = require("mongoose");
 var { workSchema } = require("./work");
 
 workSchema.statics = {
-  create: function (data, cb) {
+  create: async function (data) {
     var work = new this(data);
-    work.save(cb);
+    await work.save();
   },
 
-  get: function (query, cb) {
-    this.find(query, cb);
+  get: async function (query, cb) {
+    await this.find(query, cb);
   },
 
-  getByName: function (query, cb) {
-    this.find(query, cb);
+  getByName: async function (query, cb) {
+    await this.find(query, cb);
   },
 
-  update: function (query, updateData, cb) {
-    this.findOneAndUpdate(query, { $set: updateData }, { new: true }, cb);
+  update: async function (query, updateData, cb) {
+    await this.findOneAndUpdate(query, { $set: updateData }, { new: true }, cb);
   },
 
-  delete: function (query, cb) {
-    this.findOneAndDelete(query, cb);
+  delete: async function (query, cb) {
+    await this.findOneAndDelete(query, cb);
   },
 };
 
