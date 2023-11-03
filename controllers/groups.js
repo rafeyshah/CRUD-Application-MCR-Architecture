@@ -1,11 +1,11 @@
-var Groups = require("../models/groupsDOA");
+const Groups = require("../models/groupsDOA");
 const { validate } = require("../models/groups");
 
 exports.createGroup = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  var group = {
+  const group = {
     name: req.body.name,
     works: req.body.works,
   };
@@ -24,9 +24,9 @@ exports.createGroup = async function (req, res) {
 
 exports.getGroups = async function (req, res) {
   try {
-    const newGotWork = await Groups.find({}).populate("works");
+    const getAllGroup = await Groups.find({}).populate("works");
     res.json({
-      msg: newGotWork,
+      msg: getAllGroup,
     });
   } catch (err) {
     res.json({
@@ -37,14 +37,14 @@ exports.getGroups = async function (req, res) {
 
 
 exports.updateGroup = async function (req, res) {
-  var group = {
+  const group = {
     name: req.body.name,
     works: req.body.works,
   };
   try {
-    const updateGroup = await Groups.findByIdAndUpdate(req.params.id, group);
+    const updatedGroup = await Groups.findByIdAndUpdate(req.params.id, group);
     res.json({
-      msg: updateGroup,
+      msg: updatedGroup,
     });
   } catch (err) {
     res.json({
@@ -55,7 +55,7 @@ exports.updateGroup = async function (req, res) {
 
 exports.removeGroup = async function (req, res) {
   try {
-    const removeGroup = await Groups.findByIdAndDelete(req.params.id);
+    const removedGroup = await Groups.findByIdAndDelete(req.params.id);
     res.json({
       msg: "Group Removed",
     });

@@ -1,7 +1,7 @@
 const workerController = require("../controllers/workers");
 const express = require("express");
 
-var router = express.Router();
+const router = express.Router();
 
 router.post("/", workerController.createWorker);
 router.get("/", workerController.getWorker);

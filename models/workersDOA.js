@@ -1,9 +1,9 @@
-var mongoose = require("mongoose");
-var { workerSchema } = require("./workers");
+const mongoose = require("mongoose");
+const { workerSchema } = require("./workers");
 
 workerSchema.statics = {
   create: async function (data) {
-    var work = new this(data);
+    const work = new this(data);
     await work.save();
   },
 
@@ -24,5 +24,5 @@ workerSchema.statics = {
   },
 };
 
-var workerModel = mongoose.model("workers", workerSchema);
+const workerModel = mongoose.model("workers", workerSchema);
 module.exports = workerModel;

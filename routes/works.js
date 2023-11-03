@@ -1,8 +1,8 @@
 const workController = require("../controllers/work");
-const middleware = require("../middleware/index");
+const middleware = require("../middleware/protected");
 const express = require("express");
 
-var router = express.Router();
+const router = express.Router();
 
 router.post("/", middleware, workController.createWork);
 router.get("/", workController.getWorks);

@@ -1,4 +1,4 @@
-var User = require("../models/userDOA");
+const User = require("../models/userDOA");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -9,7 +9,7 @@ exports.createUser = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  var user = {
+  const user = {
     name: req.body.name,
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10),

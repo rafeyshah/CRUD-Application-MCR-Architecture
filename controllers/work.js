@@ -1,11 +1,11 @@
-var Work = require("../models/workDOA");
+const Work = require("../models/workDOA");
 const { validate } = require("../models/work");
 
 exports.createWork = async function (req, res) {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  var work = {
+  const work = {
     name: req.body.name,
     type: req.body.type,
     startDate: req.body.startDate,
@@ -26,9 +26,9 @@ exports.createWork = async function (req, res) {
 
 exports.getWorks = async function (req, res) {
   try {
-    const newGotWork = await Work.find({});
+    const getAllWorks = await Work.find({});
     res.json({
-      msg: newGotWork,
+      msg: getAllWorks,
     });
   } catch (err) {
     res.json({
@@ -51,7 +51,7 @@ exports.getWork = function (req, res) {
 };
 
 exports.updateWork = async function (req, res) {
-  var work = {
+  const work = {
     name: req.body.name,
     type: req.body.type,
     startDate: req.body.startDate,
@@ -59,9 +59,9 @@ exports.updateWork = async function (req, res) {
   };
   console.log(req.params.id);
   try {
-    const updateWork = await Work.findByIdAndUpdate(req.params.id, work);
+    const updatedWork = await Work.findByIdAndUpdate(req.params.id, work);
     res.json({
-      msg: updateWork,
+      msg: updatedWork,
     });
   } catch (err) {
     res.json({
@@ -72,7 +72,7 @@ exports.updateWork = async function (req, res) {
 
 exports.removeWork = async function (req, res) {
   try {
-    const removeWork = await Work.findByIdAndDelete(req.params.id);
+    const removedWork = await Work.findByIdAndDelete(req.params.id);
     res.json({
       msg: "Work Removed",
     });

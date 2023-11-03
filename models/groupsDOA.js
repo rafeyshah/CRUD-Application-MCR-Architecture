@@ -1,9 +1,9 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const { groupsSchema } = require("./groups");
 
 groupsSchema.statics = {
   create: async function (data) {
-    var work = new this(data);
+    const work = new this(data);
     await work.save();
   },
 
@@ -20,5 +20,5 @@ groupsSchema.statics = {
   },
 };
 
-var groupModel = mongoose.model("groups", groupsSchema);
+const groupModel = mongoose.model("groups", groupsSchema);
 module.exports = groupModel;

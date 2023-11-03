@@ -1,9 +1,9 @@
-var mongoose = require("mongoose");
-var { userSchema } = require("./user");
+const mongoose = require("mongoose");
+const { userSchema } = require("./user");
 
 userSchema.statics = {
   create: async function (data) {
-    var work = new this(data);
+    const work = new this(data);
     await work.save();
   },
 
@@ -16,5 +16,5 @@ userSchema.statics = {
   },
 };
 
-var workModel = mongoose.model("users", userSchema);
+const workModel = mongoose.model("users", userSchema);
 module.exports = workModel;
