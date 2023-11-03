@@ -4,10 +4,10 @@ const express = require("express");
 
 var router = express.Router();
 
-router.post("/create", middleware, workController.createWork);
-router.get("/get", workController.getWorks);
-router.get("/get/:name", workController.getWork);
-router.put("/update/:id", workController.updateWork);
-router.delete("/remove/:id", workController.removeWork);
+router.post("/", middleware, workController.createWork);
+router.get("/", workController.getWorks);
+router.get("/:name", workController.getWork);
+router.patch("/:id", workController.updateWork);
+router.delete("/:id", workController.removeWork);
 
 module.exports = router;
