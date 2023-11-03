@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 const Joi = require("joi");
-// const validator = require("express-joi-validation").createValidator({});
 
 var groupsSchema = new Schema(
   {
