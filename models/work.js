@@ -17,7 +17,8 @@ var workSchema = new Schema(
       type: String,
     },
     userId: {
-      type: Number,
+      type: Schema.Types.ObjectId,
+      ref: "Users"
     },
   },
   {

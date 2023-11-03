@@ -1,7 +1,6 @@
 var Work = require("../models/workDOA");
 
 exports.createWork = async function (req, res, next) {
-  console.log("User ID: ", req.user.id);
   var work = {
     name: req.body.name,
     type: req.body.type,
