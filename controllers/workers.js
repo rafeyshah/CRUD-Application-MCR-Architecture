@@ -2,8 +2,8 @@ var Work = require("../models/workersDOA");
 
 exports.createWorker = async function (req, res, next) {
   var worker = {
-    workId: req.body.workId,
-    groupId: req.body.groupId,
+    works: req.body.works,
+    groups: req.body.groups,
     type: req.body.type,
   };
 
@@ -21,7 +21,7 @@ exports.createWorker = async function (req, res, next) {
 
 exports.getWorker = async function (req, res, next) {
   try {
-    const newGotWorker = await Work.find({});
+    const newGotWorker = await Work.find({}).populate("works").populate("groups");
     res.json({
       msg: newGotWorker,
     });

@@ -3,7 +3,7 @@ var Groups = require("../models/groupsDOA");
 exports.createGroup = async function (req, res, next) {
   var group = {
     name: req.body.name,
-    workId: req.body.workId,
+    works: req.body.works,
   };
 
   try {
@@ -20,7 +20,7 @@ exports.createGroup = async function (req, res, next) {
 
 exports.getGroups = async function (req, res, next) {
   try {
-    const newGotWork = await Groups.find({});
+    const newGotWork = await Groups.find({}).populate("works");
     res.json({
       msg: newGotWork,
     });

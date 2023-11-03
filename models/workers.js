@@ -3,15 +3,13 @@ var Schema = mongoose.Schema;
 
 var workersSchema = new Schema(
   {
-    workId: {
-      type: String,
-      unique: false,
-      required: true,
+    works: {
+      type: Schema.Types.ObjectId,
+      ref: "works"
     },
-    groupId: {
-      type: String,
-      unique: false,
-      required: true,
+    groups: {
+      type: Schema.Types.ObjectId,
+      ref: "groups"
     },
     type: {
       type: String,

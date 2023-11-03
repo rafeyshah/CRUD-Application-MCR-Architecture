@@ -8,8 +8,9 @@ var groupSchema = new Schema(
       unique: false,
       required: true,
     },
-    workId: {
-      type: String
+    works: {
+      type: Schema.Types.ObjectId,
+      ref: "works"
     },
   },
   {
