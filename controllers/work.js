@@ -1,5 +1,11 @@
 const Work = require("../models/workDOA");
+
 const { validate } = require("../models/work");
+const MongoClient = require("mongodb").MongoClient;
+
+const dotenv = require("dotenv");
+dotenv.config();
+const url = process.env.DB;
 
 exports.createWork = async function (req, res) {
   const { error } = validate(req.body);
@@ -81,4 +87,8 @@ exports.removeWork = async function (req, res) {
       error: err,
     });
   }
+};
+
+exports.uploadCSV = async function (req, res) {
+  res.json({ message: "File uploaded successfully" });
 };

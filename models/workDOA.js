@@ -22,6 +22,10 @@ workSchema.statics = {
   delete: async function (query) {
     await this.findOneAndDelete(query);
   },
+
+  upload: async function (sample) {
+    console.log("Uploading... ", sample);
+  },
 };
 
 const workModel = mongoose.model("works", workSchema);
