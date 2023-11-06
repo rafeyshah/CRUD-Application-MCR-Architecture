@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     cb(null, "public/files/uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, "-" + Date.now());
+    cb(null, Date.now() + ".csv");
   },
 });
 
