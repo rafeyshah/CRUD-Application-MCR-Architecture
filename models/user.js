@@ -16,8 +16,19 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
+    image: {
+      type: String,
+    },
+    isDeleted: {
+      type: Boolean,
+    },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "admin",
+    },
   },
   {
     timestamps: true,
@@ -28,7 +39,10 @@ function validateUser(genre) {
   const schema = Joi.object({
     name: Joi.string().min(5).max(50).required(),
     email: Joi.string().min(5).max(50).required(),
-    password: Joi.string().min(5).max(50).required()
+    password: Joi.string().min(5).max(50).required(),
+    image: Joi.string().min(5).max(50).required(),
+    isDeleted: Joi.boolean().required(),
+    role: Joi.string().min(1).max(50).required(),
   });
 
   return schema.validate(genre);

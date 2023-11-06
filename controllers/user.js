@@ -14,6 +14,9 @@ exports.createUser = async function (req, res) {
     email: req.body.email,
     password: await bcrypt.hash(req.body.password, 10),
     userId: req.body.userId,
+    image: req.body.image,
+    isDeleted: req.body.isDeleted,
+    role: req.body.role
   };
 
   try {
