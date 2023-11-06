@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Joi = require("joi");
+const { userRoles } = require("../utils/constants");
 
 const userSchema = new Schema(
   {
@@ -24,11 +25,7 @@ const userSchema = new Schema(
     isDeleted: {
       type: Boolean,
     },
-    role: {
-      type: String,
-      enum: ["admin", "user"],
-      default: "admin",
-    },
+    role: userRoles,
   },
   {
     timestamps: true,

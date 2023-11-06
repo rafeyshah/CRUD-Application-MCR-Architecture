@@ -4,8 +4,9 @@ const bodyParser = require("body-parser");
 
 const worksRoutes = require("./routes/works");
 const userRoutes = require("./routes/user");
-const groupRoutes = require("./routes/groups")
-const workerRoutes = require("./routes/workers")
+const groupRoutes = require("./routes/groups");
+const workerRoutes = require("./routes/workers");
+const entityRoutes = require("./routes/entity");
 
 const db = require("./mongodb/database");
 
@@ -23,5 +24,6 @@ app.use("/", userRoutes);
 app.use("/works", worksRoutes);
 app.use("/groups", groupRoutes);
 app.use("/workers", workerRoutes);
+app.use("/entity", entityRoutes);
 
 app.listen(3000, () => console.log("Example app listening on port 3000!"));

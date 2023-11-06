@@ -1,12 +1,13 @@
 const userController = require("../controllers/user");
 const express = require("express");
 const router = express.Router();
-const { authentication, authorization } = require("../middleware/protected");
+const { authentication } = require("../middleware/protected");
+const { authorization } = require("../utils/authUtils");
 
 router.post(
   "/signup",
   authentication,
-  authorization,
+  authorization("ADMIN"),
   userController.createUser
 );
 router.post("/login", userController.getUser);

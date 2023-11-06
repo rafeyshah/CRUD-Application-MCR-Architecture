@@ -15,16 +15,3 @@ exports.authentication = async (req, res, next) => {
     res.status(401).json({ msg: "Couldnot Authenticate" });
   }
 };
-
-exports.authorization = async (req, res, next) => {
-  try {
-    if (req.user.role === "admin") {
-      next();
-    } else {
-      res.status(403).send("Access denied: Only admins can create new users.");
-    }
-  } catch (err) {
-    console.log("Error: ", err);
-    res.status(403).send("Access denied: Only admins can create new users.");
-  }
-};
