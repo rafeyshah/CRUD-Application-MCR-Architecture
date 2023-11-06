@@ -1,14 +1,6 @@
 const multer = require("multer");
 
-// On Express Documentation, Callbacks are used :)
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "public/files/uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + ".csv");
-  },
-});
+const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage });
 

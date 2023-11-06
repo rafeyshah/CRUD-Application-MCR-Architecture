@@ -1,5 +1,4 @@
 const userController = require("../controllers/user");
-const parserController = require("../controllers/csvFileParser");
 const express = require("express");
 const router = express.Router();
 const { authentication } = require("../middleware/protected");
@@ -13,5 +12,4 @@ router.post(
 );
 router.post("/login", userController.getUser);
 router.get("/allusers", userController.getUsers);
-router.get("/parse/:id", parserController.csvFileParser);
 module.exports = router;

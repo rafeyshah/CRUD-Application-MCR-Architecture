@@ -2,6 +2,8 @@ const Work = require("../models/workDOA");
 
 const { validate } = require("../models/work");
 const MongoClient = require("mongodb").MongoClient;
+const fs = require("fs");
+const Papa = require("papaparse");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -90,5 +92,21 @@ exports.removeWork = async function (req, res) {
 };
 
 exports.uploadCSV = async function (req, res) {
-  res.json({ message: "File uploaded successfully" });
+  try {
+    const csvFile = req.file.buffer.toString();
+    const csvArr = [];
+    Papa.parse(csvFile, {
+      header: true,
+      step: function (result) {
+        csvArr.push(result.data);
+      },
+      complete: function () {
+        res.json(csvArr);
+      },
+    });
+  } catch (ex) {
+    res.json({
+      error: ex,
+    });
+  }
 };
