@@ -1,8 +1,8 @@
 const Entity = require("../models/entityDOA");
-const { validate } = require("../models/entity");
+const { validateEntity } = require("../models/entity");
 
 exports.createEntity = async function (req, res) {
-  const { error } = validate(req.body);
+  const { error } = validateEntity(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const entity = {

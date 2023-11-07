@@ -39,7 +39,7 @@ function validateGroup(genre) {
   const schema = Joi.object({
     companyName: Joi.string().min(5).max(50).required(),
     website: Joi.string().min(5).max(50).required(),
-    country: Joi.string().min(5).max(50).required(),
+    country: Joi.string().min(1).max(50).required(),
     jobType: Joi.string().min(5).max(50).required(),
     linkedIn: Joi.string().min(5).max(50).required(),
     contact: Joi.string().min(5).max(50).required(),
@@ -48,5 +48,5 @@ function validateGroup(genre) {
 
   return schema.validate(genre);
 }
-exports.validate = validateGroup;
+exports.validateEntity = validateGroup;
 exports.entitySchema = entitySchema;

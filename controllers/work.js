@@ -1,6 +1,9 @@
 const Work = require("../models/workDOA");
 
 const { validate } = require("../models/work");
+const Entity = require("../models/entityDOA");
+const { validateEntity } = require("../models/entity");
+
 const MongoClient = require("mongodb").MongoClient;
 const fs = require("fs");
 const Papa = require("papaparse");
@@ -97,10 +100,25 @@ exports.uploadCSV = async function (req, res) {
     const csvArr = [];
     Papa.parse(csvFile, {
       header: true,
-      step: function (result) {
+      step: async function (result) {
+        console.log(result.data);
         csvArr.push(result.data);
+        const { error } = validateEntity(result.data);
+        if (error) return res.status(400).send(error.details[0].message);
+        const entity = {
+          companyName: result.data.companyName,
+          website: result.data.website,
+          country: result.data.country,
+          jobType: result.data.jobType,
+          linkedIn: result.data.linkedIn,
+          contact: result.data.contact,
+          additionalNotes: result.data.additionalNotes,
+        };
+
+        const newlyCreatedEntity = await Entity.create(entity);
       },
       complete: function () {
+        // console.log(csvArr);
         res.json(csvArr);
       },
     });
