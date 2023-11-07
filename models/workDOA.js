@@ -26,6 +26,10 @@ workSchema.statics = {
   upload: async function (sample) {
     console.log("Uploading... ", sample);
   },
+
+  getCountries: async function(query){
+    await this.find(query)
+  }
 };
 
 const workModel = mongoose.model("works", workSchema);

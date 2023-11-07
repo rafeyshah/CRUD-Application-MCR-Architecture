@@ -128,3 +128,29 @@ exports.uploadCSV = async function (req, res) {
     });
   }
 };
+
+exports.fetchCountries = async function (req, res) {
+  console.log("Before");
+  try {
+    console.log("Started");
+    const result = await Entity.aggregate([
+      {
+        "$group": {
+          "_id": 1,
+          "countries": {
+            "$addToSet": "$country"
+          }
+        }
+      }
+    ])
+    console.log("Array: ", result);
+
+    res.json({
+      msg: result,
+    });
+  } catch (err) {
+    res.json({
+      error: err,
+    });
+  }
+}

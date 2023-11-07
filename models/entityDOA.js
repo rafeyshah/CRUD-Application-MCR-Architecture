@@ -18,6 +18,10 @@ entitySchema.statics = {
   delete: async function (query) {
     await this.findOneAndDelete(query);
   },
+
+  getCountries: async function(query){
+    await this.find(query)
+  }
 };
 
 const entityModel = mongoose.model("entity", entitySchema);
