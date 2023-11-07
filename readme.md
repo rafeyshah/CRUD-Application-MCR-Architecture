@@ -10,7 +10,7 @@
 
 :lock: **Password Hashing**: Passwords are securely hashed using the Bcrypt library, ensuring user data protection.
 
-:face_with_monocle: **Validation with Joi**: Utilized the Joi library for input validation to ensure data integrity and security.
+:boom: **Validation with Joi**: Utilized the Joi library for input validation to ensure data integrity and security.
 
 :link: **Relationships Between Entities**: Established relationships and associations between different entities in the database.
 
