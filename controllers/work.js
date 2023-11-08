@@ -26,7 +26,8 @@ exports.createWork = async function (req, res) {
   try {
     const newlyCreatedWork = await Work.create(work);
     res.json({
-      msg: "Created Successfully",
+      msg: "Work has been created successfully",
+      data: work,
     });
   } catch (ex) {
     res.json({
@@ -39,7 +40,8 @@ exports.getWorks = async function (req, res) {
   try {
     const getAllWorks = await Work.find({});
     res.json({
-      msg: getAllWorks,
+      msg: "Getting all works",
+      data: getAllWorks,
     });
   } catch (err) {
     res.json({
@@ -52,7 +54,8 @@ exports.getWork = function (req, res) {
   try {
     const getWorkByName = Work.get({ name: req.params.name });
     res.json({
-      msg: getWorkByName,
+      msg: "Getting work by name",
+      data: getWorkByName,
     });
   } catch (err) {
     res.json({
@@ -72,7 +75,8 @@ exports.updateWork = async function (req, res) {
   try {
     const updatedWork = await Work.findByIdAndUpdate(req.params.id, work);
     res.json({
-      msg: updatedWork,
+      msg: "Updated work stuff",
+      data: work,
     });
   } catch (err) {
     res.json({
@@ -85,7 +89,7 @@ exports.removeWork = async function (req, res) {
   try {
     const removedWork = await Work.findByIdAndDelete(req.params.id);
     res.json({
-      msg: "Work Removed",
+      msg: `Work id removed: ${req.params.id}`,
     });
   } catch (err) {
     res.json({
@@ -119,7 +123,10 @@ exports.uploadCSV = async function (req, res) {
       },
       complete: function () {
         // console.log(csvArr);
-        res.json(csvArr);
+        res.json({
+          msg: "Uploading and parsing csv",
+          data: csvArr,
+        });
       },
     });
   } catch (ex) {
@@ -135,22 +142,23 @@ exports.fetchCountries = async function (req, res) {
     console.log("Started");
     const result = await Entity.aggregate([
       {
-        "$group": {
-          "_id": 1,
-          "countries": {
-            "$addToSet": "$country"
-          }
-        }
-      }
-    ])
+        $group: {
+          _id: 1,
+          countries: {
+            $addToSet: "$country",
+          },
+        },
+      },
+    ]);
     console.log("Array: ", result);
 
     res.json({
-      msg: result,
+      msg: "Fetching Countries",
+      data: result,
     });
   } catch (err) {
     res.json({
       error: err,
     });
   }
-}
+};

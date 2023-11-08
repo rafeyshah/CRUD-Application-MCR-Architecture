@@ -19,6 +19,7 @@ exports.createEntity = async function (req, res) {
     const newlyCreatedEntity = await Entity.create(entity);
     res.json({
       msg: "Created New Entity Successfully",
+      data: entity,
     });
   } catch (ex) {
     res.json({
@@ -31,7 +32,8 @@ exports.getEntities = async function (req, res) {
   try {
     const getAllEntities = await Entity.find({});
     res.json({
-      msg: getAllEntities,
+      msg: "Getting all entities",
+      data: getAllEntities,
     });
   } catch (err) {
     res.json({
@@ -53,7 +55,8 @@ exports.updateEntity = async function (req, res) {
   try {
     const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, entity);
     res.json({
-      msg: updatedEntity,
+      msg: "Updating entity",
+      data: entity,
     });
   } catch (err) {
     res.json({
@@ -64,9 +67,9 @@ exports.updateEntity = async function (req, res) {
 
 exports.removeEntity = async function (req, res) {
   try {
-    const removedEntity = await Groups.findByIdAndDelete(req.params.id);
+    const removedEntity = await Entity.findByIdAndDelete(req.params.id);
     res.json({
-      msg: "Group Removed",
+      msg: `Group Removed ID: ${req.params.id}`,
     });
   } catch (err) {
     res.json({

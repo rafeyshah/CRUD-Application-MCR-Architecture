@@ -13,7 +13,8 @@ exports.createGroup = async function (req, res) {
   try {
     const newlyCreatedGroup = await Groups.create(group);
     res.json({
-      msg: "Created Successfully",
+      msg: "Group created successfully",
+      data: group,
     });
   } catch (ex) {
     res.json({
@@ -26,7 +27,8 @@ exports.getGroups = async function (req, res) {
   try {
     const getAllGroup = await Groups.find({}).populate("works");
     res.json({
-      msg: getAllGroup,
+      msg: "Getting all groups",
+      data: getAllGroup,
     });
   } catch (err) {
     res.json({
@@ -34,7 +36,6 @@ exports.getGroups = async function (req, res) {
     });
   }
 };
-
 
 exports.updateGroup = async function (req, res) {
   const group = {
@@ -44,7 +45,8 @@ exports.updateGroup = async function (req, res) {
   try {
     const updatedGroup = await Groups.findByIdAndUpdate(req.params.id, group);
     res.json({
-      msg: updatedGroup,
+      msg: `Updated group id: ${req.params.id}`,
+      data: group,
     });
   } catch (err) {
     res.json({
@@ -57,7 +59,7 @@ exports.removeGroup = async function (req, res) {
   try {
     const removedGroup = await Groups.findByIdAndDelete(req.params.id);
     res.json({
-      msg: "Group Removed",
+      msg: `Group id removed ${req.params.id}`,
     });
   } catch (err) {
     res.json({

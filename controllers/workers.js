@@ -14,7 +14,8 @@ exports.createWorker = async function (req, res) {
   try {
     const newlyCreatedWorker = await Work.create(worker);
     res.json({
-      msg: "Created Worker Successfully",
+      msg: "Created worker successfully",
+      data: worker,
     });
   } catch (ex) {
     res.json({
@@ -29,7 +30,8 @@ exports.getWorker = async function (req, res) {
       .populate("works")
       .populate("groups");
     res.json({
-      msg: getAllWorkers,
+      msg: "Getting all workers",
+      data: getAllWorkers,
     });
   } catch (err) {
     res.json({
@@ -42,7 +44,8 @@ exports.getSingleWorker = async function (req, res) {
   try {
     const getSingleWorker = await Work.findById(req.params.id);
     res.json({
-      msg: getSingleWorker,
+      msg: `Getting single worker by ${req.params.id}`,
+      data: getSingleWorker,
     });
   } catch (err) {
     res.json({
@@ -60,7 +63,8 @@ exports.updateWork = async function (req, res) {
   try {
     const updatedWorker = await Work.findByIdAndUpdate(req.params.id, worker);
     res.json({
-      msg: updatedWorker,
+      msg: `Updating worker by ${req.params.id}`,
+      data: worker,
     });
   } catch (err) {
     res.json({
@@ -73,7 +77,7 @@ exports.removeWork = async function (req, res) {
   try {
     const removeWorker = await Work.findByIdAndDelete(req.params.id);
     res.json({
-      msg: "Worker Removed",
+      msg: `Removing worker by ${req.params.id}`,
     });
   } catch (err) {
     res.json({

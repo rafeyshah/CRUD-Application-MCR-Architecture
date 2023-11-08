@@ -16,14 +16,14 @@ exports.createUser = async function (req, res) {
     userId: req.body.userId,
     image: req.body.image,
     isDeleted: req.body.isDeleted,
-    role: req.body.role
+    role: req.body.role,
   };
 
   try {
     const newlyCreatedUser = await User.create(user);
     res.json({
       msg: "Signup Successfully",
-      body: newlyCreatedUser,
+      body: user,
     });
   } catch (ex) {
     res.json({
@@ -47,7 +47,10 @@ exports.getUser = async function (req, res) {
           { id: login.id, createdAt: login.createdAt },
           process.env.TOKEN_SECRET
         );
-        res.json({ token: token });
+        res.json({
+          msg: `${req.body.email} successfully logged in`,
+          token: token,
+        });
       } else {
         res.json({
           error: "Password Incorrect",
@@ -63,7 +66,8 @@ exports.getUsers = async function (req, res) {
   try {
     const allUsers = await User.find({});
     res.json({
-      msg: allUsers,
+      msg: "All users in dashboard",
+      data: allUsers,
     });
   } catch (err) {
     res.json({
